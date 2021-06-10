@@ -11,7 +11,7 @@ const Table = ({
   error,
   setPage = () => {},
 }) => {
-  if (!error)
+  if (error)
     return (
       <div className="p-4 bg-red-200">
         Sorry, data cannot be uploaded, try later
