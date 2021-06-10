@@ -27,11 +27,7 @@ const initialState = {
 export const passengerSlice = createSlice({
   name: 'passenger',
   initialState,
-  reducers: {
-    setPassengers(data) {
-      console.log(data);
-    },
-  },
+  reducers: {},
   extraReducers: {
     [fetchPassengers.pending]: (state) => {
       state.loading = true

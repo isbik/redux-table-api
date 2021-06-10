@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Table from "./components/Table";
 import { fetchPassengers } from "./features/passenger/passengerSlice";
 
 function App() {
@@ -12,26 +13,25 @@ function App() {
     dispatch(fetchPassengers({ page }));
   }, [page]);
 
+  const headers = useMemo(() => {
+    return [
+      { text: "Name", value: "name" },
+      { text: "Trips count", value: "trips" },
+      { text: "Airline Name", value: "airline" },
+    ];
+  }, []);
+
   return (
-    <div>
-      <ul>
-        {items.map((item) => {
-          return <li key={item._id}>{item.name} </li>;
-        })}
-      </ul>
-      <button
-        onClick={() => setPage(pagination.page - 1)}
-        disabled={pagination.page === 0}
-      >
-        prev
-      </button>
-      <button
-        onClick={() => setPage(pagination.page + 1)}
-        disabled={pagination.page > pagination.pages}
-      >
-        next
-      </button>
-    </div>
+    <Table
+      headers={headers}
+      items={items}
+      renderItem={({ header, item }) => {
+        if (header === "airline") {
+          return item.airline.name;
+        }
+        return header[item];
+      }}
+    ></Table>
   );
 }
 
