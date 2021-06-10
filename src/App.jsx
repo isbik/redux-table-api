@@ -8,6 +8,8 @@ function App() {
   const [page, setPage] = useState(0);
   const items = useSelector((state) => state.passenger.items);
   const pagination = useSelector((state) => state.passenger.pagination);
+  const loading = useSelector((state) => state.passenger.loading);
+  const error = useSelector((state) => state.passenger.error);
 
   useEffect(() => {
     dispatch(fetchPassengers({ page }));
@@ -24,11 +26,17 @@ function App() {
   return (
     <div className="container mx-auto p-4">
       <Table
+        itemKey="_id"
         headers={headers}
+        page={pagination.page}
+        pages={pagination.pages}
         items={items}
+        loading={loading}
+        error={error}
+        setPage={setPage}
         renderItem={({ header, item }) => {
           if (header === "airline") {
-            return item.airline.name;
+            return item.airline.name || "-";
           }
           return item[header];
         }}
