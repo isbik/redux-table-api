@@ -22,16 +22,18 @@ function App() {
   }, []);
 
   return (
-    <Table
-      headers={headers}
-      items={items}
-      renderItem={({ header, item }) => {
-        if (header === "airline") {
-          return item.airline.name;
-        }
-        return header[item];
-      }}
-    ></Table>
+    <div className="container mx-auto p-4">
+      <Table
+        headers={headers}
+        items={items}
+        renderItem={({ header, item }) => {
+          if (header === "airline") {
+            return item.airline.name;
+          }
+          return item[header];
+        }}
+      ></Table>
+    </div>
   );
 }
 
