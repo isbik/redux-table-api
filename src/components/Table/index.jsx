@@ -35,7 +35,7 @@ const Table = ({
         <tbody>
           {loading ? (
             <tr className="bg-green-200">
-              <td colspan="100%">Loading data ...</td>
+              <td colSpan="100%">Loading data ...</td>
             </tr>
           ) : (
             items.map((item, index) => (
